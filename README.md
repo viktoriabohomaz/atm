@@ -1,8 +1,8 @@
 # Atm
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/atm`. To experiment with that code, run `bin/console` for an interactive prompt.
+This gem allows you to withdraw a specified amount and returns a hash of bank notes and their count. Withdrawals subtract to the ATM's balance.
 
-TODO: Delete this and the text above, and describe your gem
+ATM's balance in `cash.json`
 
 ## Installation
 
@@ -22,7 +22,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+1. Clone this git repo:
+
+    ```git clone git@github.com:zlayaa/atm.git```
+
+2. Run lib/atm.rb
+
+    ```ruby lib/atm.rb```
+
+3. Input amount which you want to withdraw
+
+4. Change `cash.json` if you want to change ATM balance
 
 ## Development
 
