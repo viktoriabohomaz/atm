@@ -4,24 +4,20 @@ module Atm
   class Note
     include Comparable
 
-    attr_accessor :name, :count
+    attr_reader :denomination, :count
 
-    def initialize(name:, count:)
-      @name = name,
-              @count = count
-    end
-
-    def value
-      name.first
+    def initialize(denomination:, count:)
+      @denomination = denomination
+      @count = count
     end
 
     def <=>(other)
       if count < other.count
-        1
-      elsif count == other.count
-        name <=> other.name
-      elsif count > other.count
         -1
+      elsif count == other.count
+        denomination <=> other.denomination
+      elsif count > other.count
+        1
       end
     end
   end

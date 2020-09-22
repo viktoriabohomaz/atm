@@ -16,7 +16,7 @@ module Atm
     end
 
     def total
-      @default_balance.map { |note, count| note.to_i * count }.reduce(:+)
+      default_balance.map { |note, count| note.to_i * count }.reduce(:+)
     end
 
     def decrease!(note)
