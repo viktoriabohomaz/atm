@@ -6,6 +6,7 @@ require 'atm/evil_atm'
 require 'atm/note'
 require 'atm/balance'
 require 'atm/withdraw_transaction'
+require 'input'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

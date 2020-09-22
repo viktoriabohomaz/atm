@@ -16,5 +16,5 @@ module Atm
   class AmountTooHigh < Error; end
 end
 
-
-Atm::EvilAtm.new
+atm = Atm::EvilAtm.new
+atm.print_result(atm.withdraw_cash)

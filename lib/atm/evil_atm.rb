@@ -14,18 +14,24 @@ module Atm
       run_transaction
     end
 
+    def print_result(result)
+      result.each { |n, c| puts "Note: #{n}, Count: #{c}" }
+    end
+
     private
 
     def validate_input
       unless (amount % 5).zero?
-        raise AmountInvalid, 'Amount should be rounded to the nearest 5.'
+        raise AmountInvalid, 'The amount should be rounded to the nearest 5.'
       end
-      raise AmountTooLow, 'Amount too low.' if amount.negative?
+      if amount.negative?
+        raise AmountInvalid, 'The amount should be greater than 0.'
+      end
 
       total = balance.total
-      if amount > total
-        raise AmountTooHigh, "Please input number less then #{total}"
-      end
+      return unless amount > total
+
+      raise AmountTooHigh, "Please, input number less than #{total}."
     end
 
     def run_transaction
