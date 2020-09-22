@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
-require 'atm/version'
-require 'byebug'
-
 module Atm
   class EvilAtm
     attr_accessor :amount, :balance, :notes, :result
 
-    def initialize(input = Input.call, balance = Atm::Balance.new)
+    def initialize(input = ::Input.call, balance = Atm::Balance.new)
       @amount = input
       @balance = balance
     end

@@ -1,15 +1,14 @@
 # frozen_string_literal: true
 
-require 'byebug'
 module Atm
   class WithdrawTransaction
     attr_reader :amount, :balance
-    attr_accessor :cashed_notes, :notes, :withdrawn_amount
+    attr_accessor :cashed_notes, :notes, :total_cash_amount
 
     def initialize(balance:, amount:)
       @amount = amount
       @balance = balance
-      @withdrawn_amount = 0
+      @total_cash_amount = 0
       @cashed_notes = {}
     end
 
@@ -30,20 +29,20 @@ module Atm
     end
 
     def withdrawn_cash
-      until withdrawn_amount == amount
-        current_note = take_money
+      until total_cash_amount == amount
+        current_note = fetch_notes
 
         balance.decrease!(current_note.to_s)
         balance.refresh!
       end
     end
 
-    def take_money
+    def fetch_notes
       notes.each do |note|
         current_note = note.value
         next if current_note > amount
 
-        @withdrawn_amount += current_note
+        @total_cash_amount += current_note
 
         check_withdrawn_notes(current_note)
 
