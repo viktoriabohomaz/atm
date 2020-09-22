@@ -1,6 +1,9 @@
-require "atm/version"
+# frozen_string_literal: true
 
 module Atm
   class Error < StandardError; end
-  # Your code goes here...
+
+  class AmountInvalid < Error; end
+  class AmountTooLow < Error; end
+  class AmountTooHigh < Error; end
 end

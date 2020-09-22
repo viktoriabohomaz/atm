@@ -2,33 +2,43 @@
 
 require 'json'
 
-class Atm::Balance
-  DEFAULT_BALANCE_FILE = './cash.json'
-  attr_accessor :default_balance
+module Atm
+  class Balance
+    DEFAULT_BALANCE_FILE = './cash.json'
+    attr_accessor :default_balance
 
-  def initialize
-    @default_balance = read_balance_file
-  end
+    def initialize
+      setup
+    end
 
-  def total
-    @default_balance.map { |note, count| note.to_i * count }.reduce(:+)
-  end
+    def refresh!
+      setup
+    end
 
-  def decrease!(note)
-    default_balance[note] -= 1
-    update!
-  end
+    def total
+      @default_balance.map { |note, count| note.to_i * count }.reduce(:+)
+    end
 
-  private
+    def decrease!(note)
+      default_balance[note] -= 1
+      update!
+    end
 
-  def read_balance_file
-    cash_file = File.read(DEFAULT_BALANCE_FILE)
-    JSON.parse(cash_file)
-  end
+    private
 
-  def update!
-    File.open(DEFAULT_BALANCE_FILE, 'w') do |file|
-      file.write(JSON.dump(default_balance))
+    def setup
+      @default_balance = read_balance_file
+    end
+
+    def read_balance_file
+      cash_file = File.read(DEFAULT_BALANCE_FILE)
+      JSON.parse(cash_file)
+    end
+
+    def update!
+      File.open(DEFAULT_BALANCE_FILE, 'w') do |file|
+        file.write(JSON.dump(default_balance))
+      end
     end
   end
 end
